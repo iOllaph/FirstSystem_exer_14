@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="addManga.css" />
+    <title>ADD MANGA</title>
+  </head>
+  <body>
+    <header>
+      <div class="topnav">
+        <a href="home.html">Manga</a>
+        <a href="favorite.html">Favorite </a>
+        <a href="addManga.html">Add Manga</a>
+      </div>
+    </header>
+    <main>
+      <form id="formInput">
+        <div>
+          <label for="name" class="largeLabel">Name</label>
+          <input
+            id="inputName"
+            type="text"
+            placeholder="Write The Manga Title."
+            maxlength="25"
+          />
+        </div>
+        <div>
+          <label for="description" class="largeLabel">Description</label>
+          <textarea
+            id="inputDescription"
+            placeholder="Write The Manga Sinopse."
+            maxlength="265"
+          ></textarea>
+        </div>
+        <div>
+          <label for="img" class="largeLabel">Link Image</label>
+          <input
+            id="inputImg"
+            type="text"
+            placeholder="Paste Here The Link Image."
+          />
+        </div>
+        <div></div>
+        <div class="full-width">
+          <button class="addManga Send" type="button" onclick="addManga()">
+            Send Response
+          </button>
+          <button class="addManga Clear" type="reset" onclick="clearForm()">
+            Clear Form
+          </button>
+        </div>
+      </form>
+    </main>
+  </body>
+  <script src="addManga.js"></script>
+</html>
