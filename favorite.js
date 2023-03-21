@@ -77,36 +77,28 @@ function udpateview() {
         buttonRemove.addEventListener("click", () =>{
 
             
-            
-            // Delete the whole card and remove from local storage
-            
-            var index = likedCards.findIndex(function(cardElementFind) {
-                return cardElementFind.id == card.id
-            } )
-            
+             // remove the card from the likedCards array
+            const index = likedCards.findIndex((likedCard) => likedCard.id === card.id);
             likedCards.splice(index, 1);
+            
+            // delete the likedButton property from the card
+            delete card.likedButton;
 
-            localStorage.setItem("liked_cards", JSON.stringify(likedCards)); 
-
-            /* to read the vector cards i have to put the "for" inside the button,
-            and apply the change i wnat to the cards vector */
-
-            for (i = 0; i < cards.length; i++) {
-                const card = cards[i];
-
-                delete card.likedButton
-
-                localStorage.setItem("saved_cards", JSON.stringify(cards));
-
+            // remove the card from the cards array, if present
+            const cardIndex = cards.findIndex((c) => c.id === card.id);
+            if (cardIndex !== -1) {
+                cards[cardIndex] = card;
             }
             
-            // remove the cardElement from the container
-
+            // update the local storage
+            localStorage.setItem("liked_cards", JSON.stringify(likedCards));
+            localStorage.setItem("saved_cards", JSON.stringify(cards));
+            
+            // remove the card element from the DOM
             cardElement.remove();
 
-                        
-
-            
+            // update the view
+            udpateview();
 
         })
     }

@@ -1,0 +1,33 @@
+To delete the "likedButton" property from the card in the cards array when the remove button is clicked, you can modify the existing code to remove the property from the card object in addition to deleting the card from the likedCards array and removing the card element from the DOM.
+
+Here's an example of how you can modify the code to achieve this:
+
+javascript
+Copy code
+buttonRemove.addEventListener("click", () => {
+  // remove the card from the likedCards array
+  const index = likedCards.findIndex((likedCard) => likedCard.id === card.id);
+  likedCards.splice(index, 1);
+  
+  // delete the likedButton property from the card
+  delete card.likedButton;
+
+  // remove the card from the cards array, if present
+  const cardIndex = cards.findIndex((c) => c.id === card.id);
+  if (cardIndex !== -1) {
+    cards[cardIndex] = card;
+  }
+  
+  // update the local storage
+  localStorage.setItem("liked_cards", JSON.stringify(likedCards));
+  localStorage.setItem("saved_cards", JSON.stringify(cards));
+  
+  // remove the card element from the DOM
+  cardElement.remove();
+
+  // update the view
+  udpateview();
+});
+In the code above, after removing the card from the likedCards array and deleting the "likedButton" property from the card object, we check if the card is present in the cards array. If the card is present, we replace it with the modified card object. Finally, we call the updateview() function to update the view with the modified cards array.
+
+Note that in order for this to work correctly, the cards array should not have duplicate objects with the same id property, as the code above only replaces the first matching object in the array

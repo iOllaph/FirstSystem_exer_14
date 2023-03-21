@@ -7,6 +7,12 @@ let likedCards = [];
 // array cards
 let cards = [];
 
+// Get the liked_cards stored and put them in the array vector
+let likedCardsStorage = JSON.parse(localStorage.getItem("liked_cards"));
+
+if (likedCardsStorage != null) {
+        likedCards = likedCardsStorage;
+}
 
 // Get the cards stored and put them in the array vector
 let cards_storage = JSON.parse(localStorage.getItem("saved_cards"));
@@ -131,7 +137,7 @@ function udpateview() {
             var index = cards.findIndex(function(cardElementFind) {
                 return cardElementFind.id == card.id
             } )
-             
+
             cards.splice(index, 1);
 
             localStorage.setItem("saved_cards", JSON.stringify(cards));
