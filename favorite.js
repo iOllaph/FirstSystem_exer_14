@@ -8,6 +8,13 @@ let likedCards = [];
 let cards = [];
 
 // Get the cards stored and put them in the array vector
+let cards_storage = JSON.parse(localStorage.getItem("saved_cards"));
+
+if (cards_storage != null) {
+        cards = cards_storage;
+}
+
+// Get the liked_cards stored and put them in the array vector
 let likedCardsStorage = JSON.parse(localStorage.getItem("liked_cards"));
 
 if (likedCardsStorage != null) {
@@ -19,6 +26,9 @@ udpateview();
 
 // function udpateview
 function udpateview() {
+
+    cardContainer.innerHTML = "";
+
     for (i = 0; i < likedCards.length; i++) {
         const card = likedCards[i];
 
@@ -66,17 +76,37 @@ function udpateview() {
         
         buttonRemove.addEventListener("click", () =>{
 
+            
+            
             // Delete the whole card and remove from local storage
             
             var index = likedCards.findIndex(function(cardElementFind) {
                 return cardElementFind.id == card.id
             } )
-             
+            
             likedCards.splice(index, 1);
 
-            localStorage.setItem("liked_cards", JSON.stringify(likedCards));
+            localStorage.setItem("liked_cards", JSON.stringify(likedCards)); 
 
-            cardElement.remove(); 
+            /* to read the vector cards i have to put the "for" inside the button,
+            and apply the change i wnat to the cards vector */
+
+            for (i = 0; i < cards.length; i++) {
+                const card = cards[i];
+
+                delete card.likedButton
+
+                localStorage.setItem("saved_cards", JSON.stringify(cards));
+
+            }
+            
+            // remove the cardElement from the container
+
+            cardElement.remove();
+
+                        
+
+            
 
         })
     }
